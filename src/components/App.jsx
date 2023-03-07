@@ -13,11 +13,13 @@ export class App extends Component {
   };
   render() {
     return (
-      <div>
-        <Searchbar onSubmit={this.handleFormSubmit} />
-        <ImageGallery request={this.state.request} />
-        <ToastContainer />
-      </div>
+      <>
+        <div>
+          <Searchbar onSubmit={this.handleFormSubmit} />
+          <ImageGallery request={this.state.request} />
+          <ToastContainer />
+        </div>
+      </>
     );
   }
 }
