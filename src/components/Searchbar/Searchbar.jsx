@@ -1,17 +1,19 @@
 import { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from './Searchbar.module.css';
 import { toast } from 'react-toastify';
 import { FcSearch } from 'react-icons/fc';
 
-export default class searchBar extends Component {
+export default class SearchBar extends Component {
   state = {
     request: '',
   };
+
   handleRequestChange = event => {
     this.setState({ request: event.currentTarget.value.toLowerCase() });
   };
-  hendleSubmit = event => {
+
+  handleSubmit = event => {
     event.preventDefault();
     if (this.state.request.trim() === '') {
       return toast.error('Введите запрос!');
@@ -19,10 +21,11 @@ export default class searchBar extends Component {
     this.props.onSubmit(this.state.request);
     this.setState({ request: '' });
   };
+
   render() {
     return (
       <header className={styled.Searchbar}>
-        <form className={styled.SearchForm} onSubmit={this.hendleSubmit}>
+        <form className={styled.SearchForm} onSubmit={this.handleSubmit}>
           <button type="submit" className={styled.SearchForm_button}>
             <FcSearch className={styled.icon} />
           </button>
@@ -39,5 +42,6 @@ export default class searchBar extends Component {
     );
   }
 }
-
-//export default searchBar;
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
