@@ -3,6 +3,7 @@ import ImageGalleryItem from 'components/ImageGalleryItem';
 import Button from 'components/Button';
 import fetchImages from 'components/FetchData';
 import styled from './ImageGallery.module.css';
+import Modal from '../Modal';
 
 class ImageGallery extends Component {
   state = {
@@ -11,6 +12,8 @@ class ImageGallery extends Component {
     error: null,
     currentPage: 1,
     totalHits: 1,
+    currentImage: '',
+    showModal: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -52,9 +55,16 @@ class ImageGallery extends Component {
     }, 1000);
   };
 
+  toggleModal = image => {
+    this.setState({ currentImage: image });
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
   render() {
-    const { loading, response, error, totalHits } = this.state;
-    console.log(totalHits);
+    const { loading, response, error, totalHits, currentImage, showModal } =
+      this.state;
+
     return (
       <div>
         <h1>Gallery</h1>
@@ -65,13 +75,20 @@ class ImageGallery extends Component {
           <div>
             <ul className={styled.ImageGallery}>
               {response.map(item => (
-                <ImageGalleryItem key={item.id} item={item} />
+                <ImageGalleryItem
+                  key={item.id}
+                  item={item}
+                  onClick={this.toggleModal}
+                />
               ))}
             </ul>
             {response.length < totalHits && (
               <Button onLoadMore={this.handleLoadMore} />
             )}
           </div>
+        )}
+        {showModal && (
+          <Modal onClose={this.toggleModal} currentImage={currentImage}></Modal>
         )}
       </div>
     );
