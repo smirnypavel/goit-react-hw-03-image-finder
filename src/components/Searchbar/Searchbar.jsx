@@ -29,8 +29,6 @@ export default class searchBar extends Component {
           <input
             className={styled.SearchForm_input}
             type="text"
-            // autocomplete="off"
-            // autofocus
             placeholder="Search..."
             name="request"
             value={this.state.request}
