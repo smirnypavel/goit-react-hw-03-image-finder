@@ -4,6 +4,7 @@ import Button from 'components/Button';
 import fetchImages from 'components/FetchData';
 import styled from './ImageGallery.module.css';
 import Modal from '../Modal';
+import Loader from 'components/Loader/Loader';
 
 class ImageGallery extends Component {
   state = {
@@ -67,10 +68,11 @@ class ImageGallery extends Component {
 
     return (
       <div>
-        <h1>Gallery</h1>
         {error && <h1>{error}</h1>}
-        {loading && <div>Загружаем...</div>}
-        {!this.props.request && <div>Введите запрос</div>}
+        {loading && <Loader />}
+        {!this.props.request && (
+          <div className={styled.request}>Введите запрос</div>
+        )}
         {response && (
           <div>
             <ul className={styled.ImageGallery}>

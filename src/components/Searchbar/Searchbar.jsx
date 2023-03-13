@@ -2,13 +2,13 @@ import { Component } from 'react';
 // import PropTypes from 'prop-types';
 import styled from './Searchbar.module.css';
 import { toast } from 'react-toastify';
+import { FcSearch } from 'react-icons/fc';
 
 export default class searchBar extends Component {
   state = {
     request: '',
   };
   handleRequestChange = event => {
-    // console.log(event.currentTarget.value);
     this.setState({ request: event.currentTarget.value.toLowerCase() });
   };
   hendleSubmit = event => {
@@ -24,7 +24,7 @@ export default class searchBar extends Component {
       <header className={styled.Searchbar}>
         <form className={styled.SearchForm} onSubmit={this.hendleSubmit}>
           <button type="submit" className={styled.SearchForm_button}>
-            <span>Search</span>
+            <FcSearch className={styled.icon} />
           </button>
           <input
             className={styled.SearchForm_input}
